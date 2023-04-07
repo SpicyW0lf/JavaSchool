@@ -27,5 +27,10 @@ public class Valids {
             System.out.println("Некорректный тип параметра");
             return false;
         }
+        return false;
+    }
+
+    public static boolean isIURequestCorrect(String request) {
+        return request.substring(7, 13).equalsIgnoreCase("values");
     }
 }
