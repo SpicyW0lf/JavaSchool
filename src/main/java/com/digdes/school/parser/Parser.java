@@ -1,15 +1,53 @@
 package com.digdes.school.parser;
 
+import com.digdes.school.operations.Operation;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
+    private String expression;
 
-    public static Requests parseRequest(String request) throws Exception {
-        return Requests.valueOf(request.substring(0, 6).toUpperCase());
+    public Parser(String request) {
+        this.expression = request;
     }
 
-    private static List<String> parseCondition(String condition) {
+    public Parser() {
 
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
+    }
+
+    public String parseOperation() {
+        return expression.substring(0, 6).toLowerCase();
+    }
+
+    public String parseCondition() {
+        for (int pos = 6; pos < expression.length(); pos++) {
+
+        }
+        return "";
+    }
+
+    public String parseValues() {
+        String str = "";
+        for (int pos = 13; pos < expression.length(); pos++) {
+            if (expression.charAt(pos) == '\'') {
+                str += expression.charAt(pos);
+                pos++;
+                while (expression.charAt(pos) != '\'') {
+                    str += expression.charAt(pos);
+                    pos++;
+                }
+                str += expression.charAt(pos);
+            } else if (expression.charAt(pos) == 'w' &&
+                    expression.substring(pos, pos + 5).equalsIgnoreCase("where")) {
+                return str.trim();
+            } else str += expression.charAt(pos);
+        }
+
+        return str.trim();
     }
 }
