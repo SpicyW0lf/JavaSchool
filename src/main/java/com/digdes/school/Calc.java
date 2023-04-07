@@ -3,6 +3,8 @@ package com.digdes.school;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Calc {
     private String postfixString;
@@ -40,14 +42,38 @@ public class Calc {
     }
 
     public List<Map<String, Object>> calcLike(List<Map<String, Object>> table,
-                                              String column, String var)  {
+                                              String var)  {
         List<Map<String, Object>> result = new ArrayList<>();
 
-
-        if () {
-
+        for (Map<String, Object> el : table) {
+            if (isLikedorIliked(String.valueOf(el.get("lastName")), var)) {
+                result.add(el);
+            }
         }
+
+        return result;
     }
 
-    private
+    public List<Map<String, Object>> calcIlike(List<Map<String, Object>> table,
+                                               String var) {
+        List<Map<String, Object>> result = new ArrayList<>();
+        String lower = var.toLowerCase();
+
+        for (Map<String, Object> el : table) {
+            String obj = String.valueOf(el.get("lastName")).toLowerCase();
+            if (isLikedorIliked(obj, var)) {
+                result.add(el);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean isLikedorIliked(String obj, String var) {
+        String str = var.replaceAll("%", ".*");
+        Pattern pattern = Pattern.compile(str);
+        Matcher matcher = pattern.matcher(obj);
+
+        return matcher.matches();
+    }
 }
