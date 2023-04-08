@@ -25,13 +25,22 @@ public class Parser {
     }
 
     public String parseCondition() {
-        for (int pos = 6; pos < expression.length(); pos++) {
-
+        for (int pos = 0; pos < expression.length(); pos++) {
+            if (expression.charAt(pos) == '\'') {
+                pos++;
+                while (expression.charAt(pos) != '\'') {
+                    pos++;
+                }
+            } else if (expression.charAt(pos) == 'w' &&
+                    expression.substring(pos, pos + 5).equalsIgnoreCase("where")) {
+                return expression.substring(pos + 5).trim();
+            }
         }
+
         return "";
     }
 
-    public String parseValues() {
+    public String parseValues() throws Exception {
         String str = "";
         for (int pos = 13; pos < expression.length(); pos++) {
             if (expression.charAt(pos) == '\'') {

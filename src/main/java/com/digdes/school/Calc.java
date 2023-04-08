@@ -41,6 +41,56 @@ public class Calc {
         return result;
     }
 
+    public List<Map<String, Object>> calcCompare(List<Map<String, Object>> table,
+                                                 String column, Long var, String op) {
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (Map<String, Object> el : table) {
+            if (op.equals("<")) {
+                if ((Long)el.get(column) < var) {
+                    result.add(el);
+                }
+            } else if (op.equals(">")) {
+                if ((Long)el.get(column) > var) {
+                    result.add(el);
+                }
+            } else if (op.equals(">=")) {
+                if ((Long)el.get(column) >= var) {
+                    result.add(el);
+                }
+            } else if ((Long)el.get(column) <= var) {
+                result.add(el);
+            }
+        }
+
+        return result;
+    }
+
+    public List<Map<String, Object>> calcCompare(List<Map<String, Object>> table,
+                                                 String column, Double var, String op) {
+        List<Map<String, Object>> result = new ArrayList<>();
+
+        for (Map<String, Object> el : table) {
+            if (op.equals("<")) {
+                if ((Double)el.get(column) < var) {
+                    result.add(el);
+                }
+            } else if (op.equals(">")) {
+                if ((Double)el.get(column) > var) {
+                    result.add(el);
+                }
+            } else if (op.equals(">=")) {
+                if ((Double)el.get(column) >= var) {
+                    result.add(el);
+                }
+            } else if ((Double)el.get(column) <= var) {
+                result.add(el);
+            }
+        }
+
+        return result;
+    }
+
     public List<Map<String, Object>> calcLike(List<Map<String, Object>> table,
                                               String var)  {
         List<Map<String, Object>> result = new ArrayList<>();
