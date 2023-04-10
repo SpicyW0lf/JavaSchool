@@ -1,4 +1,4 @@
-package com.digdes.school;
+package com.digdes.school.calculations;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -119,7 +119,7 @@ public class Calc {
         return result;
     }
 
-    private boolean isLikedorIliked(String obj, String var) {
+    private boolean isLikedOrIliked(String obj, String var) {
         String str = var.replaceAll("%", ".*");
         Pattern pattern = Pattern.compile(str);
         Matcher matcher = pattern.matcher(obj);

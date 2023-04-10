@@ -1,5 +1,4 @@
 import com.digdes.school.parser.Parser;
-import com.digdes.school.service.Finder;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,7 +23,8 @@ public class ParserTest {
     @Test
     public void testWhereFinder() {
         String str = "select 'where'=22 or 'sdf' = 5 where 'a' = 5 and 'b' = 3";
-        assertEquals("'a' = 5 and 'b' = 3", str.substring(Finder.whereFinder(str)).trim());
+        Parser parser = new Parser(str);
+        assertEquals("'a' = 5 and 'b' = 3", parser.parseCondition());
     }
 
 }
