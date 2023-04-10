@@ -32,6 +32,7 @@ public class ConditionParser {
 
     private String getString(String expr) {
         String strNumber = "";
+        pos++;
 
         for (; pos < expr.length(); pos++) {
             char symb = expr.charAt(pos);
@@ -50,7 +51,7 @@ public class ConditionParser {
 
         for (int i = 0; pos < expr.length(); pos++, i++) {
             strOperator += expr.charAt(pos);
-            if (operators.containsKey(expr.substring(pos-i, pos))) {
+            if (operators.containsKey(expr.substring(pos-i, pos+1))) {
                 break;
             }
             if (i == 6) {
@@ -94,7 +95,7 @@ public class ConditionParser {
                 stack.push("(");
             } else if (c == ')') {
                 while (!stack.isEmpty() && stack.peek() != "(") {
-                    postfixExpr += stack.pop();
+                    postfixExpr += stack.pop() + " ";
                 }
                 stack.pop();
             } else if (c == ' ') {
@@ -108,15 +109,15 @@ public class ConditionParser {
                 }
                 while (!stack.isEmpty() &&
                         (operators.get(stack.peek()) >= operators.get(op))) {
-                    postfixExpr += stack.pop();
+                    postfixExpr += stack.pop() + " ";
                 }
                 stack.push(op);
             }
         }
         for (String op : stack) {
-            postfixExpr += op;
+            postfixExpr += op + " ";
         }
 
-        return postfixExpr;
+        return postfixExpr.trim();
     }
 }
