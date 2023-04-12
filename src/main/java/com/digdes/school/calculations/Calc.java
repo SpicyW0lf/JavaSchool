@@ -96,7 +96,7 @@ public class Calc {
         List<Map<String, Object>> result = new ArrayList<>();
 
         for (Map<String, Object> el : table) {
-            if (isLikedorIliked(String.valueOf(el.get("lastName")), var)) {
+            if (isLikedOrIliked(String.valueOf(el.get("lastName")), var)) {
                 result.add(el);
             }
         }
@@ -111,7 +111,7 @@ public class Calc {
 
         for (Map<String, Object> el : table) {
             String obj = String.valueOf(el.get("lastName")).toLowerCase();
-            if (isLikedorIliked(obj, var)) {
+            if (isLikedOrIliked(obj, var)) {
                 result.add(el);
             }
         }

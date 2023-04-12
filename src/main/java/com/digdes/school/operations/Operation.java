@@ -7,9 +7,8 @@ public interface Operation {
     public List<Map<String, Object>> doOperation(List<Map<String, Object>> table,
                                                  String values, String where);
 
-    public Map<String, Object> createValue(List<Map<String, Object>> table,
-                                              String values);
+    public Map<String, Object> createValue(String values) throws Exception;
 
-    public int findWhere(List<Map<String, Object>> table,
+    public List<Integer> findWhere(List<Map<String, Object>> table,
                          String where);
 }
