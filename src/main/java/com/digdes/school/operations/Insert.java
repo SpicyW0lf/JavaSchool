@@ -38,7 +38,7 @@ public class Insert implements Operation{
                     pos++;
                 }
                 pos++;
-            } else if (!column.isEmpty() && var.isEmpty()) {
+            } else if (!column.isEmpty()) {
                 if (value.charAt(pos) == '=') {
                     if (value.charAt(pos+1) == ' ') {
                         pos += 2;
@@ -46,21 +46,24 @@ public class Insert implements Operation{
                 } else throw new Exception("Строка введена неверно");
                 if (value.charAt(pos) == '\'') {
                     pos++;
-                    while (value.charAt(pos) != '\'') {
+                    while (pos < value.length() && value.charAt(pos) != '\'') {
                         var += value.charAt(pos);
                         pos++;
                     }
                     pos++;
-                    if (value.charAt(pos) == ' ') pos++;
-                    if (value.charAt(pos) != ',') throw new Exception("Строка введена неверно");
+                    if (pos < value.length()) {
+                        if (value.charAt(pos) == ' ') pos++;
+                        if (value.charAt(pos) != ',') throw new Exception("Строка введена неверно");
+                    }
                 } else {
-                    pos++;
-                    while (value.charAt(pos) != ' ' || value.charAt(pos) != ',') {
+                    while (pos < value.length() && value.charAt(pos) != ' ' && value.charAt(pos) != ',') {
                         var += value.charAt(pos);
                         pos++;
                     }
-                    if (value.charAt(pos) == ' ') pos++;
-                    if (value.charAt(pos) != ',') throw new Exception("Строка введена неверно");
+                    if (pos < value.length()) {
+                        if (value.charAt(pos) == ' ') pos++;
+                        if (value.charAt(pos) != ',') throw new Exception("Строка введена неверно");
+                    }
                 }
                 if (row.containsKey(column)) {
                     Valids.isTypeCorrect(column, var);
@@ -68,7 +71,7 @@ public class Insert implements Operation{
                     column = "";
                     var = "";
                 } else throw new Exception("Строка введена неверно");
-            }
+            } else throw new Exception("Строка введена неверно");
 
         }
 
